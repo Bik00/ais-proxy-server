@@ -1,8 +1,30 @@
  * Serving Flask app 'proxy'
  * Debug mode: off
-[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
-[33mPress CTRL+C to quit[0m
-210.183.100.33 - - [07/Mar/2025 06:25:34] "OPTIONS /generate HTTP/1.1" 200 -
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 06:48:13] "OPTIONS /generate HTTP/1.1" 200 -
+ERROR:proxy:Exception on /generate [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/proxy_env/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/proxy_env/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/proxy_env/lib/python3.12/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/proxy_env/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/proxy_env/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/git_repo/proxy.py", line 58, in generate
+    with open(image_path, "wb") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/path/to/comfyui/input/uploaded_image.jpg'
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 06:48:13] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
