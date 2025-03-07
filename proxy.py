@@ -40,6 +40,13 @@ def generate():
     if "13" in sample and "inputs" in sample["13"]:
         sample["13"]["inputs"]["text"] = negative_prompt
 
+    print("테에스트")
+    print(positive_prompt)
+    print("\n")
+    print("테에스트2")
+    print(negative_prompt)
+    print("\n")
+
     # 수정된 workflow를 내부 서버(ComfyUI)의 엔드포인트로 전달합니다.
     inner_server_url = "http://54.180.123.29:8188/prompt"
     try:
