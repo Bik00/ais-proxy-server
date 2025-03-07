@@ -8,7 +8,7 @@ app = Flask(__name__)
 with open('sample.json', 'r', encoding='utf-8') as f:
     workflow_template = json.load(f)
 
-# Inner Server의 ComfyUI 엔드포인트 (슬래시를 포함)
+# Inner Server의 ComfyUI 엔드포인트 (기본 포트 8188 사용, 경로 끝에 슬래시 포함)
 INNER_SERVER_URL = 'http://54.180.123.29:8188/generate/'
 
 @app.route('/generate', methods=['POST', 'OPTIONS'])
@@ -21,7 +21,7 @@ def generate():
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
         return response
 
-    # 클라이언트 데이터 파싱
+    # 클라이언트 전송 데이터 파싱
     data = request.get_json()
     positive_prompt = data.get('positive_prompt', '').strip()
     negative_prompt = data.get('negative_prompt', '').strip()
@@ -37,14 +37,14 @@ def generate():
     workflow["14"]["inputs"]["positive"] = ["8", 0]
     workflow["14"]["inputs"]["negative"] = ["13", 0]
 
-    # 초기 이미지가 있다면 노드 "1"에 반영
+    # 초기 이미지가 있다면 반영
     if "init_images" in data and data["init_images"]:
         workflow["1"]["inputs"]["image"] = data["init_images"][0]
 
     app.logger.debug("업데이트된 워크플로우: %s", json.dumps(workflow, ensure_ascii=False))
 
     try:
-        # Inner Server에 POST 요청 (슬래시가 포함된 URL 사용)
+        # Inner Server에 POST 요청
         resp = requests.post(INNER_SERVER_URL, json=workflow)
         try:
             result = resp.json()
