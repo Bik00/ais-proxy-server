@@ -5,7 +5,7 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:54:04] "OPTIONS /generate HTTP/1.1" 200 -
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:58:22] "OPTIONS /generate HTTP/1.1" 200 -
 DEBUG:proxy:Request to Inner Server: {
   "1": {
     "inputs": {
@@ -72,7 +72,7 @@ DEBUG:proxy:Request to Inner Server: {
   },
   "13": {
     "inputs": {
-      "text": "",
+      "text": "watermark",
       "clip": [
         "39",
         1
@@ -181,4 +181,4 @@ DEBUG:proxy:Request to Inner Server: {
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 54.180.123.29:8188
 DEBUG:urllib3.connectionpool:http://54.180.123.29:8188 "POST /prompt HTTP/1.1" 400 41
 ERROR:proxy:Failed to forward request to inner server: 400 Client Error: Bad Request for url: http://54.180.123.29:8188/prompt
-INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:54:05] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:58:22] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
