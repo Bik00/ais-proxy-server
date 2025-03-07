@@ -1,22 +1,8 @@
-import json
-import copy
-import logging
-import requests
 import base64
-import os
+import binascii
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-
-logging.basicConfig(level=logging.DEBUG)
-
-INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
-INPUT_DIR = "/path/to/comfyui/input"  # ComfyUI input 폴더 경로로 수정 필요
-
-with open("sample.json", "r", encoding="utf-8") as f:
-    sample_template = json.load(f)
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -24,45 +10,22 @@ def generate():
     if not payload:
         return jsonify({"error": "No payload received"}), 400
 
-    positive_prompt = payload.get("prompt")
-    negative_prompt = payload.get("negative_prompt", "watermark")
-    if not positive_prompt:
-        return jsonify({"error": "No prompt provided in payload"}), 400
-    if not negative_prompt:
-        negative_prompt = "watermark"
-
-    sample = copy.deepcopy(sample_template)
-
-    sample["8"]["inputs"]["text"] = positive_prompt
-    sample["13"]["inputs"]["text"] = negative_prompt
-
     init_images = payload.get("init_images", [])
-    if init_images:
-        image_data = base64.b64decode(init_images[0])
-        image_filename = "uploaded_image.jpg"
-        image_path = os.path.join(INPUT_DIR, image_filename)
-        with open(image_path, "wb") as f:
-            f.write(image_data)
-        sample["1"]["inputs"]["image"] = image_filename
+    if not init_images:
+        return jsonify({"error": "No init_images provided"}), 400
 
-    # 파라미터를 워크플로우에 직접 설정
-    sample["14"]["inputs"]["cfg"] = payload.get("cfg_scale", 8)
-    sample["4"]["inputs"]["strength"] = payload.get("denoising_strength", 0.6)
-    sample["14"]["inputs"]["sampler_name"] = "euler"  # 지원되는 샘플러로 수정
-
-    comfy_payload = {"prompt": sample}
-
-    app.logger.debug("Request to Inner Server: %s", json.dumps(comfy_payload, indent=2))
-
+    base64_image = init_images[0]
     try:
-        inner_response = requests.post(INNER_SERVER_URL, json=comfy_payload)
-        inner_response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        app.logger.error("Failed to forward request to inner server: %s", str(e))
-        return jsonify({"error": "Failed to forward request to inner server", "details": str(e)}), 500
-
-    app.logger.debug("Inner Server response: %s", inner_response.text)
-    return jsonify(inner_response.json()), 200
+        # 패딩 보정: 길이를 4의 배수로 만듦
+        missing_padding = len(base64_image) % 4
+        if missing_padding:
+            base64_image += '=' * (4 - missing_padding)
+        image_data = base64.b64decode(base64_image)
+        # 이후 이미지 처리 로직...
+        return jsonify({"message": "Image processed successfully"})
+    except binascii.Error as e:
+        app.logger.error(f"Base64 decoding error: {str(e)}")
+        return jsonify({"error": "Invalid base64 image data", "details": str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0', port=5000)
