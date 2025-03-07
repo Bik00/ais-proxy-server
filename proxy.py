@@ -24,8 +24,9 @@ def generate():
         return jsonify({"error": "No payload received"}), 400
 
     # payload 내에 "prompt" 키의 값을 추출합니다.
-    prompt_text = payload.get("prompt")
-    if not prompt_text:
+    positive_prompt = payload.get("prompt")
+    negative_prompt = payload.get("negative_prompt")
+    if not positive_prompt:
         return jsonify({"error": "No prompt provided in payload"}), 400
 
     # sample_template의 깊은 복사본을 만들어 요청별로 수정합니다.
@@ -33,9 +34,11 @@ def generate():
 
     # sample.json의 단계 "8" (긍정 프롬프트)의 "inputs"의 "text" 필드를 업데이트합니다.
     if "8" in sample and "inputs" in sample["8"]:
-        sample["8"]["inputs"]["text"] = prompt_text
+        sample["8"]["inputs"]["text"] = positive_prompt
     else:
         return jsonify({"error": "Workflow template missing positive prompt configuration"}), 500
+    if "13" in workflow and "inputs" in workflow["13"]:
+        sample["13"]["inputs"]["text"] = negative_prompt
 
     # 수정된 workflow를 내부 서버(ComfyUI)의 엔드포인트로 전달합니다.
     inner_server_url = "http://54.180.123.29:8188/prompt"
