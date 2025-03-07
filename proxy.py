@@ -16,11 +16,27 @@ PROMPT_ENDPOINT = f'{INNER_SERVER_URL}/prompt'
 with open("sample.json", "r", encoding="utf-8") as f:
     sample_template = json.load(f)
 
+def remove_data_prefix(image_data):
+    prefix = "data:image/png;base64,"
+    if image_data.startswith(prefix):
+        return image_data[len(prefix):]
+    return image_data
+
 @app.route('/generate', methods=['POST'])
 def generate():
     payload = request.get_json()
     if not payload:
         return jsonify({"error": "페이로드가 없습니다"}), 400
+
+    # 만약 'init_images' 필드가 있다면 각 이미지 데이터에서 접두어 제거
+    if 'init_images' in payload and isinstance(payload['init_images'], list):
+        processed_images = []
+        for img in payload['init_images']:
+            if isinstance(img, str):
+                processed_images.append(remove_data_prefix(img))
+            else:
+                processed_images.append(img)
+        payload['init_images'] = processed_images
 
     positive_prompt = payload.get("prompt")
     if not positive_prompt:
