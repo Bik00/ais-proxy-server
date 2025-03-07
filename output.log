@@ -5,6 +5,5 @@
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
 [33mPress CTRL+C to quit[0m
-210.183.100.33 - - [07/Mar/2025 03:52:13] "OPTIONS /generate HTTP/1.1" 200 -
-[2025-03-07 03:52:13,357] ERROR in proxy: JSON 파싱 오류: Extra data: line 1 column 4 (char 3), 응답 내용: 405: Method Not Allowed
-210.183.100.33 - - [07/Mar/2025 03:52:13] "[31m[1mPOST /generate HTTP/1.1[0m" 405 -
+210.183.100.33 - - [07/Mar/2025 04:11:49] "OPTIONS /generate HTTP/1.1" 200 -
+210.183.100.33 - - [07/Mar/2025 04:11:49] "[31m[1mPOST /generate HTTP/1.1[0m" 400 -
