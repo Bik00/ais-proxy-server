@@ -23,6 +23,7 @@ INNER_IMAGE_PATH_PREFIX = r"C:\temp_images"
 
 # Inner Server의 ComfyUI 프롬프트 API 엔드포인트 (예시)
 INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
+INNER_SERVER_STATUS_URL = 'http://54.180.123.29:8188/status'
 
 def save_base64_image(data_uri):
     r"""
@@ -108,6 +109,26 @@ def generate():
         try:
             inner_response = requests.post(INNER_SERVER_URL, json=comfy_payload, headers=headers)
             inner_response.raise_for_status()
+            data = inner_response.json()
+            prompt_id = data.get("prompt_id")
+            if not prompt_id:
+                return jsonify({"error": "prompt_id를 받지 못했습니다."}), 500
+            
+            # prompt_id를 이용해 inner 서버에서 생성된 이미지 결과를 폴링
+            timeout = 60       # 최대 60초 대기
+            poll_interval = 2  # 2초 간격 폴링
+            elapsed = 0
+            while elapsed < timeout:
+                status_response = requests.get(INNER_SERVER_STATUS_URL, params={"prompt_id": prompt_id})
+                if status_response.status_code == 200:
+                    status_data = status_response.json()
+                    # inner 서버에서 images 필드에 생성된 이미지가 포함되어 있다면 완료된 것으로 간주
+                    if "images" in status_data and status_data["images"]:
+                        return jsonify(status_data)
+                time.sleep(poll_interval)
+                elapsed += poll_interval
+            
+            return jsonify({"error": "이미지 생성이 시간 내에 완료되지 않았습니다.", "prompt_id": prompt_id}), 504
         except requests.exceptions.RequestException as e:
             app.logger.error("내부 서버 요청 실패: %s", str(e))
             return jsonify({"error": "내부 서버 요청 실패", "details": str(e)}), 500
