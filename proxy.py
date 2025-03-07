@@ -9,7 +9,7 @@ with open('sample.json', 'r', encoding='utf-8') as f:
     workflow_template = json.load(f)
 
 # Inner Server의 ComfyUI 엔드포인트 (필요에 따라 수정하세요)
-INNER_SERVER_URL = 'http://54.180.123.29:8188/generate'
+INNER_SERVER_URL = 'http://54.180.123.29:8000/generate'
 
 @app.route('/generate', methods=['POST', 'OPTIONS'])
 def generate():
@@ -45,12 +45,19 @@ def generate():
     if "init_images" in data and data["init_images"]:
         workflow["1"]["inputs"]["image"] = data["init_images"][0]
 
-    app.logger.debug("업데이트된 워크플로우: %s", json.dumps(workflow))
+    app.logger.debug("업데이트된 워크플로우: %s", json.dumps(workflow, ensure_ascii=False))
 
     # Inner Server의 ComfyUI로 업데이트된 워크플로우를 전달합니다.
     try:
         resp = requests.post(INNER_SERVER_URL, json=workflow)
-        return jsonify(resp.json()), resp.status_code
+        # 응답이 JSON인지 시도합니다.
+        try:
+            result = resp.json()
+        except Exception as json_err:
+            app.logger.error("JSON 파싱 오류: %s, 응답 내용: %s", str(json_err), resp.text)
+            # JSON 파싱에 실패하면, 응답 텍스트를 그대로 반환합니다.
+            result = {"raw_response": resp.text}
+        return jsonify(result), resp.status_code
     except Exception as e:
         app.logger.error("요청 전달 오류: %s", str(e))
         return jsonify({"error": "요청 전달에 실패했습니다."}), 500
