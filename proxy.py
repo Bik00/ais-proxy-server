@@ -3,7 +3,6 @@ import copy
 import logging
 import requests
 import base64
-import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import binascii
@@ -13,8 +12,9 @@ CORS(app)
 
 logging.basicConfig(level=logging.DEBUG)
 
-INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
-INPUT_DIR = "/path/to/comfyui/input"  # 실제 경로로 수정 필요
+INNER_SERVER_URL = 'http://54.180.123.29:8188'
+UPLOAD_ENDPOINT = f'{INNER_SERVER_URL}/upload'
+PROMPT_ENDPOINT = f'{INNER_SERVER_URL}/prompt'
 
 with open("sample.json", "r", encoding="utf-8") as f:
     sample_template = json.load(f)
@@ -42,22 +42,26 @@ def generate():
         else:
             base64_data = image_data_uri
 
-        # 데이터 유효성 검증
-        if len(base64_data) % 4 != 0:
-            app.logger.error("base64 데이터 길이가 4의 배수가 아님")
-            return jsonify({"error": "잘못된 base64 데이터 길이"}), 400
-
         try:
             image_data = base64.b64decode(base64_data)
         except binascii.Error as e:
             app.logger.error("Base64 디코딩 오류: %s", str(e))
             return jsonify({"error": "잘못된 base64 데이터", "details": str(e)}), 400
 
-        image_filename = "uploaded_image.jpg"
-        image_path = os.path.join(INPUT_DIR, image_filename)
-        with open(image_path, "wb") as f:
-            f.write(image_data)
-        sample["1"]["inputs"]["image"] = image_filename
+        # Inner Server의 /upload 엔드포인트로 이미지 업로드
+        files = {'image': ('uploaded_image.jpg', image_data, 'image/jpeg')}
+        try:
+            upload_response = requests.post(UPLOAD_ENDPOINT, files=files)
+            upload_response.raise_for_status()
+            uploaded_filename = upload_response.json().get('filename')
+            if not uploaded_filename:
+                raise ValueError("파일명이 반환되지 않았습니다.")
+        except (requests.exceptions.RequestException, ValueError) as e:
+            app.logger.error("이미지 업로드 실패: %s", str(e))
+            return jsonify({"error": "이미지 업로드 실패", "details": str(e)}), 500
+
+        # 워크플로우 JSON에 업로드된 파일명 설정
+        sample["1"]["inputs"]["image"] = uploaded_filename
 
     sample["14"]["inputs"]["cfg"] = payload.get("cfg_scale", 8)
     sample["4"]["inputs"]["strength"] = payload.get("denoising_strength", 0.6)
@@ -67,7 +71,7 @@ def generate():
     app.logger.debug("내부 서버 요청: %s", json.dumps(comfy_payload, indent=2))
 
     try:
-        inner_response = requests.post(INNER_SERVER_URL, json=comfy_payload)
+        inner_response = requests.post(PROMPT_ENDPOINT, json=comfy_payload)
         inner_response.raise_for_status()
     except requests.exceptions.RequestException as e:
         app.logger.error("내부 서버 요청 실패: %s", str(e))
