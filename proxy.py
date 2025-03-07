@@ -26,9 +26,11 @@ def generate():
     if not payload:
         return jsonify({"error": "No payload received"}), 400
 
-    # 긍정 프롬프트와 부정 프롬프트 추출 (부정 프롬프트는 기본값 빈 문자열)
+    # 긍정 프롬프트와 부정 프롬프트 추출
     positive_prompt = payload.get("prompt")
-    negative_prompt = payload.get("negative_prompt", "")
+    negative_prompt = payload.get("negative_prompt", "watermark")
+    if not negative_prompt:  # 빈 문자열이거나 None일 경우 "watermark"로 설정
+        negative_prompt = "watermark"
 
     # 긍정 프롬프트가 없는 경우 에러 반환
     if not positive_prompt:
