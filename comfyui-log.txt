@@ -1,0 +1,105 @@
+Adding extra search path checkpoints C:\StabilityMatrix\Models\StableDiffusion
+Adding extra search path vae C:\StabilityMatrix\Models\VAE
+Adding extra search path loras C:\StabilityMatrix\Models\Lora
+Adding extra search path loras C:\StabilityMatrix\Models\LyCORIS
+Adding extra search path upscale_models C:\StabilityMatrix\Models\ESRGAN
+Adding extra search path upscale_models C:\StabilityMatrix\Models\RealESRGAN
+Adding extra search path upscale_models C:\StabilityMatrix\Models\SwinIR
+Adding extra search path embeddings C:\StabilityMatrix\Models\TextualInversion
+Adding extra search path hypernetworks C:\StabilityMatrix\Models\Hypernetwork
+Adding extra search path controlnet C:\StabilityMatrix\Models\ControlNet
+Adding extra search path controlnet C:\StabilityMatrix\Models\T2IAdapter
+Adding extra search path clip C:\StabilityMatrix\Models\CLIP
+Adding extra search path clip_vision C:\StabilityMatrix\Models\InvokeClipVision
+Adding extra search path diffusers C:\StabilityMatrix\Models\Diffusers
+Adding extra search path gligen C:\StabilityMatrix\Models\GLIGEN
+Adding extra search path vae_approx C:\StabilityMatrix\Models\ApproxVAE
+Adding extra search path ipadapter C:\StabilityMatrix\Models\IpAdapter
+Adding extra search path ipadapter C:\StabilityMatrix\Models\InvokeIpAdapters15
+Adding extra search path ipadapter C:\StabilityMatrix\Models\InvokeIpAdaptersXl
+Adding extra search path prompt_expansion C:\StabilityMatrix\Models\PromptExpansion
+Adding extra search path ultralytics C:\StabilityMatrix\Models\Ultralytics
+Adding extra search path ultralytics_bbox C:\StabilityMatrix\Models\Ultralytics\bbox
+Adding extra search path ultralytics_segm C:\StabilityMatrix\Models\Ultralytics\segm
+Adding extra search path sams C:\StabilityMatrix\Models\Sams
+Adding extra search path diffusion_models C:\StabilityMatrix\Models\unet
+[START] Security scan
+[DONE] Security scan
+## ComfyUI-Manager: installing dependencies done.
+** ComfyUI startup time: 2025-03-07 16:56:33.856081
+** Platform: Windows
+** Python version: 3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]
+** Python executable: C:\StabilityMatrix\Packages\ComfyUI\venv\Scripts\python.exe
+** ComfyUI Path: C:\StabilityMatrix\Packages\ComfyUI
+** User directory: C:\StabilityMatrix\Packages\ComfyUI\user
+** ComfyUI-Manager config path: C:\StabilityMatrix\Packages\ComfyUI\user\default\ComfyUI-Manager\config.ini
+** Log path: C:\StabilityMatrix\Packages\ComfyUI\user\comfyui.log
+
+Prestartup times for custom nodes:
+   3.8 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager
+
+Checkpoint files will always be loaded safely.
+Total VRAM 15191 MB, total RAM 16176 MB
+pytorch version: 2.6.0+cu124
+Set vram state to: NORMAL_VRAM
+Device: cuda:0 Tesla T4 : native
+Using pytorch attention
+ComfyUI version: 0.3.24
+[Prompt Server] web root: C:\StabilityMatrix\Packages\ComfyUI\venv\lib\site-packages\comfyui_frontend_package\static
+Adding C:\StabilityMatrix\Packages\ComfyUI\custom_nodes to sys.path
+Could not find efficiency nodes
+[comfyui_controlnet_aux] | INFO -> Using ckpts path: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux\ckpts
+[comfyui_controlnet_aux] | INFO -> Using symlinks: False
+[comfyui_controlnet_aux] | INFO -> Using ort providers: ['CUDAExecutionProvider', 'DirectMLExecutionProvider', 'OpenVINOExecutionProvider', 'ROCMExecutionProvider', 'CPUExecutionProvider', 'CoreMLExecutionProvider']
+C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux\node_wrappers\dwpose.py:26: UserWarning: DWPose: Onnxruntime not found or doesn't come with acceleration providers, switch to OpenCV with CPU device. DWPose might run very slowly
+  warnings.warn("DWPose: Onnxruntime not found or doesn't come with acceleration providers, switch to OpenCV with CPU device. DWPose might run very slowly")
+Loaded ControlNetPreprocessors nodes from C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux
+Loaded AdvancedControlNet nodes from C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Advanced-ControlNet
+Could not find AnimateDiff nodes
+Could not find IPAdapter nodes
+Could not find VideoHelperSuite nodes
+Could not load ImpactPack nodes Could not find ImpactPack nodes
+### Loading: ComfyUI-Manager (V3.5.1)
+### ComfyUI Version: v0.3.24-2-ge62d72e8 | Released on '2025-03-06'
+
+Import times for custom nodes:
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\websocket_image_save.py
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\cg-use-everywhere
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\text-utility
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\sdxl_prompt_styler
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-SAI_API
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfy_clip_blip_node
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\stability-ComfyUI-nodes
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_stringessentials
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Advanced-ControlNet
+   0.6 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager
+   1.3 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui-art-venture
+
+Starting server
+
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+To see the GUI go to: http://0.0.0.0:8188
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+got prompt
+model weight dtype torch.float16, manual cast: None
+model_type EPS
+Using pytorch attention in VAE
+Using pytorch attention in VAE
+VAE load device: cuda:0, offload device: cpu, dtype: torch.float32
+CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16
+loaded diffusion model directly to GPU
+Requested to load BaseModel
+loaded completely 9.5367431640625e+25 1639.406135559082 True
+Requested to load SD1ClipModel
+loaded completely 9237.89130859375 235.84423828125 True
+Token indices sequence length is longer than the specified maximum sequence length for this model (162 > 77). Running this sequence through the model will result in indexing errors
+Requested to load ControlNet
+loaded completely 8952.57734375 689.0852355957031 True
+100%|██████████| 20/20 [00:05<00:00,  3.46it/s]
+Requested to load AutoencoderKL
+loaded completely 6893.7001953125 319.11416244506836 True
+Prompt executed in 15.62 seconds
