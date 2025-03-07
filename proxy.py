@@ -25,7 +25,7 @@ INNER_IMAGE_PATH_PREFIX = r"C:\temp_images"
 INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
 
 def save_base64_image(data_uri):
-    """
+    r"""
     데이터 URI 형식의 base64 문자열을 받아서 로컬 TEMP 디렉토리에 이미지 파일로 저장한 후,
     Inner Server에서 접근 가능한 경로(예, "C:\temp_images\<파일명>")를 반환합니다.
     """
