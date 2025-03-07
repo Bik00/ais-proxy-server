@@ -1,64 +1,75 @@
 import json
-import copy  # 추가: copy 모듈 임포트
+import copy
 import logging
 import requests
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # flask-cors 임포트
+from flask_cors import CORS
 
+# Flask 애플리케이션 설정
 app = Flask(__name__)
-CORS(app)  # 모든 도메인에 대해 CORS 허용. 필요시 resources 매개변수를 이용해 제한 가능.
+CORS(app)
+
+# 로깅 설정 (DEBUG 레벨로 모든 로그 기록)
 logging.basicConfig(level=logging.DEBUG)
 
-# Inner Server의 ComfyUI 엔드포인트 (수정 없이 그대로 사용)
+# Inner Server의 ComfyUI 엔드포인트 URL
 INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
 
-# 서버 시작 시에 workflow 템플릿 파일(sample.json)을 미리 로드합니다.
+# 서버 시작 시 workflow 템플릿(sample.json)을 미리 로드
 with open("sample.json", "r", encoding="utf-8") as f:
     sample_template = json.load(f)
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    # 클라이언트로부터 JSON payload를 받습니다.
+    # 클라이언트로부터 받은 JSON 페이로드
     payload = request.get_json()
     if not payload:
         return jsonify({"error": "No payload received"}), 400
 
-    # payload 내에 "prompt" 키의 값을 추출합니다.
+    # 긍정 프롬프트와 부정 프롬프트 추출 (부정 프롬프트는 기본값 빈 문자열)
     positive_prompt = payload.get("prompt")
-    negative_prompt = payload.get("negative_prompt")
+    negative_prompt = payload.get("negative_prompt", "")
 
+    # 긍정 프롬프트가 없는 경우 에러 반환
     if not positive_prompt:
         return jsonify({"error": "No prompt provided in payload"}), 400
 
-    # sample_template의 깊은 복사본을 만들어 요청별로 수정합니다.
+    # sample.json 템플릿의 깊은 복사본 생성
     sample = copy.deepcopy(sample_template)
 
-    # sample.json의 단계 "8" (긍정 프롬프트)의 "inputs"의 "text" 필드를 업데이트합니다.
-    if "8" in sample and "inputs" in sample["8"]:
+    # 긍정 프롬프트 설정 (노드 "8")
+    if "8" in sample and "inputs" in sample["8"] and "text" in sample["8"]["inputs"]:
         sample["8"]["inputs"]["text"] = positive_prompt
     else:
         return jsonify({"error": "Workflow template missing positive prompt configuration"}), 500
-    if "13" in sample and "inputs" in sample["13"]:
+
+    # 부정 프롬프트 설정 (노드 "13")
+    if "13" in sample and "inputs" in sample["13"] and "text" in sample["13"]["inputs"]:
         sample["13"]["inputs"]["text"] = negative_prompt
+    else:
+        return jsonify({"error": "Workflow template missing negative prompt configuration"}), 500
 
-    sample["13"]["inputs"]["text"] = "text, watermark"
+    # 요청 JSON 로그 기록
+    app.logger.debug("Request to Inner Server: %s", json.dumps(sample, indent=2))
 
-    app.logger.error("test1: [%s]", str(sample["8"]["inputs"]["text"]))
-    app.logger.error("test2: [%s]", str(sample["13"]["inputs"]["text"]))
-
-    # 수정된 workflow를 내부 서버(ComfyUI)의 엔드포인트로 전달합니다.
-    inner_server_url = "http://54.180.123.29:8188/prompt"
+    # Inner Server로 요청 전송
     try:
-        inner_response = requests.post(inner_server_url, json=sample)
-    except Exception as e:
+        inner_response = requests.post(INNER_SERVER_URL, json=sample)
+        inner_response.raise_for_status()  # HTTP 에러 발생 시 예외 발생
+    except requests.exceptions.RequestException as e:
+        app.logger.error("Failed to forward request to inner server: %s", str(e))
         return jsonify({"error": "Failed to forward request to inner server", "details": str(e)}), 500
 
-    # 내부 서버의 응답 상태에 따라 적절하게 전달합니다.
+    # Inner Server 응답 상태 확인
     if inner_response.status_code != 200:
+        app.logger.error("Inner server error: %s", inner_response.text)
         return jsonify({"error": "Inner server error", "details": inner_response.text}), inner_response.status_code
 
+    # 응답 JSON 로그 기록
+    app.logger.debug("Inner Server response: %s", inner_response.text)
+
+    # 성공 시 Inner Server 응답 반환
     return jsonify(inner_response.json()), 200
 
 if __name__ == '__main__':
-    # 개발용 서버로 실행 (운영 환경에서는 production WSGI 서버 사용 권장)
     app.run(host="0.0.0.0", port=5000)
