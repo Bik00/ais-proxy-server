@@ -1,4 +1,5 @@
 import json
+import copy  # 추가: copy 모듈 임포트
 import logging
 import requests
 from flask import Flask, request, jsonify
