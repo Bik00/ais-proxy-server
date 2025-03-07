@@ -9,7 +9,7 @@ with open('sample.json', 'r', encoding='utf-8') as f:
     workflow_template = json.load(f)
 
 # Inner Server의 ComfyUI 엔드포인트 (필요에 따라 수정하세요)
-INNER_SERVER_URL = 'http://54.180.123.29:8000/generate'
+INNER_SERVER_URL = 'http://54.180.123.29:8188/generate'
 
 @app.route('/generate', methods=['POST', 'OPTIONS'])
 def generate():
