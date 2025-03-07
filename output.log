@@ -5,7 +5,15 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 04:51:04] "OPTIONS /generate HTTP/1.1" 200 -
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:15:37] "OPTIONS /generate HTTP/1.1" 200 -
+ERROR:proxy:test1: [a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism 반드시 사진 속 구도와 배치는 그대로 유지하면서, 나머지 분위기, 인테리어, 질감, 벽지 등의 스타일과 세부 요소는 아래 프롬프트 내용에 따라 변경.]
+ERROR:proxy:test2: []
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 54.180.123.29:8188
 DEBUG:urllib3.connectionpool:http://54.180.123.29:8188 "POST /prompt HTTP/1.1" 400 41
-INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 04:51:04] "[31m[1mPOST /generate HTTP/1.1[0m" 400 -
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:15:37] "[31m[1mPOST /generate HTTP/1.1[0m" 400 -
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:16:36] "OPTIONS /generate HTTP/1.1" 200 -
+ERROR:proxy:test1: [a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism 반드시 사진 속 구도와 배치는 그대로 유지하면서, 나머지 분위기, 인테리어, 질감, 벽지 등의 스타일과 세부 요소는 아래 프롬프트 내용에 따라 변경.]
+ERROR:proxy:test2: []
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 54.180.123.29:8188
+DEBUG:urllib3.connectionpool:http://54.180.123.29:8188 "POST /prompt HTTP/1.1" 400 41
+INFO:werkzeug:210.183.100.33 - - [07/Mar/2025 05:16:36] "[31m[1mPOST /generate HTTP/1.1[0m" 400 -

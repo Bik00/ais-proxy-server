@@ -26,6 +26,8 @@ def generate():
     # payload 내에 "prompt" 키의 값을 추출합니다.
     positive_prompt = payload.get("prompt")
     negative_prompt = payload.get("negative_prompt")
+    app.logger.error("test1: [%s]", str(positive_prompt))
+    app.logger.error("test2: [%s]", str(negative_prompt))
     if not positive_prompt:
         return jsonify({"error": "No prompt provided in payload"}), 400
 
@@ -40,12 +42,8 @@ def generate():
     if "13" in sample and "inputs" in sample["13"]:
         sample["13"]["inputs"]["text"] = negative_prompt
 
-    print("테에스트")
-    print(positive_prompt)
-    print("\n")
-    print("테에스트2")
-    print(negative_prompt)
-    print("\n")
+    if not negative_prompt:
+        sample["13"]["inputs"]["text"] = "text, watermark"
 
     # 수정된 workflow를 내부 서버(ComfyUI)의 엔드포인트로 전달합니다.
     inner_server_url = "http://54.180.123.29:8188/prompt"
