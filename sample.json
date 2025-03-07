@@ -23,26 +23,11 @@
       "strength": 1,
       "start_percent": 0,
       "end_percent": 1,
-      "positive": [
-        "8",
-        0
-      ],
-      "negative": [
-        "13",
-        0
-      ],
-      "control_net": [
-        "3",
-        0
-      ],
-      "image": [
-        "1",
-        0
-      ],
-      "vae": [
-        "39",
-        2
-      ]
+      "positive": ["8", 0],
+      "negative": ["13", 0],
+      "control_net": ["3", 0],
+      "image": ["1", 0],
+      "vae": ["39", 2]
     },
     "class_type": "ControlNetApplyAdvanced",
     "_meta": {
@@ -51,11 +36,8 @@
   },
   "8": {
     "inputs": {
-      "text": "real, a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism",
-      "clip": [
-        "39",
-        1
-      ]
+      "text": "",
+      "clip": ["39", 1]
     },
     "class_type": "CLIPTextEncode",
     "_meta": {
@@ -65,10 +47,7 @@
   "13": {
     "inputs": {
       "text": "",
-      "clip": [
-        "39",
-        1
-      ]
+      "clip": ["39", 1]
     },
     "class_type": "CLIPTextEncode",
     "_meta": {
@@ -86,35 +65,14 @@
       "start_at_step": 0,
       "end_at_step": 10000,
       "return_with_leftover_noise": "disable",
-      "model": [
-        "23",
-        0
-      ],
-      "positive": [
-        "4",
-        0
-      ],
-      "negative": [
-        "4",
-        1
-      ],
-      "latent_image": [
-        "25",
-        0
-      ]
+      "model": ["39", 0],
+      "positive": ["4", 0],
+      "negative": ["4", 1],
+      "latent_image": ["25", 0]
     },
     "class_type": "KSamplerAdvanced",
     "_meta": {
       "title": "고급 KSampler"
-    }
-  },
-  "23": {
-    "inputs": {
-      "ckpt_name": "architectureInterior_v70.safetensors"
-    },
-    "class_type": "CheckpointLoaderSimple",
-    "_meta": {
-      "title": "체크포인트 로드"
     }
   },
   "25": {
@@ -134,14 +92,8 @@
       "overlap": 64,
       "temporal_size": 64,
       "temporal_overlap": 8,
-      "samples": [
-        "14",
-        0
-      ],
-      "vae": [
-        "23",
-        2
-      ]
+      "samples": ["14", 0],
+      "vae": ["39", 2]
     },
     "class_type": "VAEDecodeTiled",
     "_meta": {
@@ -150,10 +102,7 @@
   },
   "31": {
     "inputs": {
-      "images": [
-        "26",
-        0
-      ]
+      "images": ["26", 0]
     },
     "class_type": "SaveImageWebsocket",
     "_meta": {

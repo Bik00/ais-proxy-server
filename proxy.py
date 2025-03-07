@@ -29,10 +29,6 @@ def generate():
     # 긍정 프롬프트와 부정 프롬프트 추출
     positive_prompt = payload.get("prompt")
     negative_prompt = payload.get("negative_prompt", "watermark")
-    if not negative_prompt:  # 빈 문자열이거나 None일 경우 "watermark"로 설정
-        negative_prompt = "watermark"
-
-    # 긍정 프롬프트가 없는 경우 에러 반환
     if not positive_prompt:
         return jsonify({"error": "No prompt provided in payload"}), 400
 
@@ -51,12 +47,30 @@ def generate():
     else:
         return jsonify({"error": "Workflow template missing negative prompt configuration"}), 500
 
+    # init_images 처리 (base64 이미지 데이터 사용)
+    init_images = payload.get("init_images", [])
+    if init_images:
+        # 예: 첫 번째 이미지를 사용 (ComfyUI에서 base64 이미지 지원 여부 확인 필요)
+        # ComfyUI가 base64 이미지를 직접 지원하지 않을 수 있으므로, 파일로 저장하는 로직 추가 필요
+        # 여기서는 간단히 파일명을 설정하는 것으로 가정
+        sample["1"]["inputs"]["image"] = "uploaded_image.jpg"  # 실제로는 파일 저장 로직 필요
+
+    # ComfyUI가 기대하는 형식으로 요청 JSON 래핑
+    comfy_payload = {
+        "prompt": sample,
+        "extra_data": {
+            "denoising_strength": payload.get("denoising_strength", 0.6),
+            "cfg_scale": payload.get("cfg_scale", 8)
+            # 기타 필요한 파라미터 추가
+        }
+    }
+
     # 요청 JSON 로그 기록
-    app.logger.debug("Request to Inner Server: %s", json.dumps(sample, indent=2))
+    app.logger.debug("Request to Inner Server: %s", json.dumps(comfy_payload, indent=2))
 
     # Inner Server로 요청 전송
     try:
-        inner_response = requests.post(INNER_SERVER_URL, json=sample)
+        inner_response = requests.post(INNER_SERVER_URL, json=comfy_payload)
         inner_response.raise_for_status()  # HTTP 에러 발생 시 예외 발생
     except requests.exceptions.RequestException as e:
         app.logger.error("Failed to forward request to inner server: %s", str(e))
