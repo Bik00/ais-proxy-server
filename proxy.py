@@ -2,8 +2,10 @@ import json
 import logging
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # flask-cors 임포트
 
 app = Flask(__name__)
+CORS(app)  # 모든 도메인에 대해 CORS 허용. 필요시 resources 매개변수를 이용해 제한 가능.
 logging.basicConfig(level=logging.DEBUG)
 
 # Inner Server의 ComfyUI 엔드포인트 (수정 없이 그대로 사용)
@@ -28,15 +30,13 @@ def generate():
         return jsonify({"error": "No prompts provided"}), 400
     
     # sample.json의 워크플로우를 복제하여 수정합니다.
-    # (원본은 그대로 두기 위해 deepcopy 사용)
     workflow = json.loads(json.dumps(base_workflow))
     
-    # 긍정 프롬프트를 업데이트 (워크플로우에서 key "8"이 긍정 프롬프트에 해당)
+    # 긍정 프롬프트 업데이트 (키 "8")
     if '8' in workflow and 'inputs' in workflow['8']:
-        # 만약 클라이언트에서 입력하지 않았다면 기본값을 할당할 수 있습니다.
         workflow['8']['inputs']['text'] = positive_prompt if positive_prompt else "default positive prompt"
     
-    # 부정 프롬프트를 업데이트 (key "13"에 해당)
+    # 부정 프롬프트 업데이트 (키 "13")
     if '13' in workflow and 'inputs' in workflow['13']:
         workflow['13']['inputs']['text'] = negative_prompt if negative_prompt else "default negative prompt"
     
