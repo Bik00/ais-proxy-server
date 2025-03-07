@@ -5,6 +5,6 @@
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
 [33mPress CTRL+C to quit[0m
-210.183.100.33 - - [07/Mar/2025 03:18:41] "OPTIONS /generate HTTP/1.1" 200 -
-[2025-03-07 03:20:56,166] ERROR in proxy: 요청 전달 오류: HTTPConnectionPool(host='54.180.123.29', port=8000): Max retries exceeded with url: /generate (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x71c47b96cb00>, 'Connection to 54.180.123.29 timed out. (connect timeout=None)'))
-210.183.100.33 - - [07/Mar/2025 03:20:56] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
+210.183.100.33 - - [07/Mar/2025 03:33:25] "OPTIONS /generate HTTP/1.1" 200 -
+[2025-03-07 03:33:25,375] ERROR in proxy: 요청 전달 오류: Extra data: line 1 column 4 (char 3)
+210.183.100.33 - - [07/Mar/2025 03:33:25] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
