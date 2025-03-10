@@ -26,7 +26,7 @@ Adding extra search path diffusion_models C:\StabilityMatrix\Models\unet
 [START] Security scan
 [DONE] Security scan
 ## ComfyUI-Manager: installing dependencies done.
-** ComfyUI startup time: 2025-03-07 16:56:33.856081
+** ComfyUI startup time: 2025-03-10 12:52:48.220320
 ** Platform: Windows
 ** Python version: 3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]
 ** Python executable: C:\StabilityMatrix\Packages\ComfyUI\venv\Scripts\python.exe
@@ -36,7 +36,7 @@ Adding extra search path diffusion_models C:\StabilityMatrix\Models\unet
 ** Log path: C:\StabilityMatrix\Packages\ComfyUI\user\comfyui.log
 
 Prestartup times for custom nodes:
-   3.8 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager
+   3.6 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager
 
 Checkpoint files will always be loaded safely.
 Total VRAM 15191 MB, total RAM 16176 MB
@@ -44,7 +44,8 @@ pytorch version: 2.6.0+cu124
 Set vram state to: NORMAL_VRAM
 Device: cuda:0 Tesla T4 : native
 Using pytorch attention
-ComfyUI version: 0.3.24
+ComfyUI version: 0.3.26
+ComfyUI frontend version: 1.11.8
 [Prompt Server] web root: C:\StabilityMatrix\Packages\ComfyUI\venv\lib\site-packages\comfyui_frontend_package\static
 Adding C:\StabilityMatrix\Packages\ComfyUI\custom_nodes to sys.path
 Could not find efficiency nodes
@@ -60,30 +61,31 @@ Could not find IPAdapter nodes
 Could not find VideoHelperSuite nodes
 Could not load ImpactPack nodes Could not find ImpactPack nodes
 ### Loading: ComfyUI-Manager (V3.5.1)
-### ComfyUI Version: v0.3.24-2-ge62d72e8 | Released on '2025-03-06'
+### ComfyUI Version: v0.3.26-1-ge1da98a1 | Released on '2025-03-09'
 
 Import times for custom nodes:
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\websocket_image_save.py
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\sdxl_prompt_styler
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\cg-use-everywhere
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\text-utility
-   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\sdxl_prompt_styler
-   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-SAI_API
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfy_clip_blip_node
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\stability-ComfyUI-nodes
-   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-SAI_API
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_stringessentials
+   0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui_controlnet_aux
    0.0 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Advanced-ControlNet
    0.6 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager
-   1.3 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui-art-venture
+   1.2 seconds: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\comfyui-art-venture
 
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
 Starting server
 
-[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
 To see the GUI go to: http://0.0.0.0:8188
 [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
-[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
-[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
 [ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+FETCH DATA from: C:\StabilityMatrix\Packages\ComfyUI\custom_nodes\ComfyUI-Manager\extension-node-map.json [DONE]
 got prompt
 model weight dtype torch.float16, manual cast: None
 model_type EPS
@@ -99,7 +101,9 @@ loaded completely 9237.89130859375 235.84423828125 True
 Token indices sequence length is longer than the specified maximum sequence length for this model (162 > 77). Running this sequence through the model will result in indexing errors
 Requested to load ControlNet
 loaded completely 8952.57734375 689.0852355957031 True
-100%|██████████| 20/20 [00:05<00:00,  3.46it/s]
+100%|██████████| 20/20 [00:05<00:00,  3.60it/s]
 Requested to load AutoencoderKL
 loaded completely 6893.7001953125 319.11416244506836 True
-Prompt executed in 15.62 seconds
+Prompt executed in 12.84 seconds
+got prompt
+Prompt executed in 0.03 seconds

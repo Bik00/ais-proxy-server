@@ -18,9 +18,9 @@ LOCAL_TEMP_DIR = '/home/ubuntu/temp_images'
 if not os.path.exists(LOCAL_TEMP_DIR):
     os.makedirs(LOCAL_TEMP_DIR)
 
-INNER_IMAGE_PATH_PREFIX = r"C:\temp_images"
 INNER_SERVER_URL = 'http://13.125.242.189:8188/prompt'
-INNER_SERVER_HISTORY_URL = 'http://13.125.242.189:8188/history'  # History 엔드포인트 추가
+INNER_SERVER_HISTORY_URL = 'http://13.125.242.189:8188/history'
+INNER_SERVER_VIEW_URL = 'http://13.125.242.189:8188/view'
 
 def save_base64_image(data_uri):
     if ',' in data_uri:
@@ -43,9 +43,14 @@ def save_base64_image(data_uri):
     image_data = base64.b64decode(encoded)
     with open(local_filepath, 'wb') as f:
         f.write(image_data)
-    
-    inner_filepath = os.path.join(INNER_IMAGE_PATH_PREFIX, filename)
-    return inner_filepath
+    return filename
+
+def upload_image_to_inner_server(image_path):
+    with open(image_path, 'rb') as f:
+        files = {'image': (os.path.basename(image_path), f, 'image/png')}
+        response = requests.post('http://13.125.242.189:8188/upload/image', files=files)
+        response.raise_for_status()
+        return response.json()['name']
 
 with open("sample.json", "r", encoding="utf-8") as f:
     sample_template = json.load(f)
@@ -57,12 +62,15 @@ def generate():
         if not payload:
             return jsonify({"error": "페이로드가 없습니다"}), 400
 
+        # 업로드된 초기 이미지 처리
         if 'init_images' in payload and isinstance(payload['init_images'], list):
             new_init_images = []
             for item in payload['init_images']:
                 if isinstance(item, str) and item.startswith('data:image'):
-                    inner_path = save_base64_image(item)
-                    new_init_images.append(inner_path)
+                    local_filename = save_base64_image(item)
+                    local_filepath = os.path.join(LOCAL_TEMP_DIR, local_filename)
+                    inner_filename = upload_image_to_inner_server(local_filepath)
+                    new_init_images.append(inner_filename)
                 else:
                     new_init_images.append(item)
             payload['init_images'] = new_init_images
@@ -81,6 +89,9 @@ def generate():
         sample["14"]["inputs"]["cfg"] = payload.get("cfg_scale", 8)
         sample["4"]["inputs"]["strength"] = payload.get("denoising_strength", 0.6)
         sample["14"]["inputs"]["sampler_name"] = "euler"
+        # 동적으로 업로드된 이미지 설정
+        if payload.get('init_images'):
+            sample["1"]["inputs"]["image"] = payload['init_images'][0]
 
         comfy_payload = {"prompt": sample}
         app.logger.debug("내부 서버 요청: %s", json.dumps(comfy_payload, indent=2))
@@ -101,21 +112,20 @@ def generate():
             if history_response.status_code == 200:
                 history_data = history_response.json()
                 if prompt_id in history_data and "outputs" in history_data[prompt_id]:
-                    # 이미지 파일 경로 추출 (ComfyUI는 파일명을 반환)
                     outputs = history_data[prompt_id]["outputs"]
                     for node_id, output in outputs.items():
                         if "images" in output:
                             images = output["images"]
                             if images:
-                                # Inner Server에서 생성된 이미지 파일을 읽어 Base64로 변환
                                 image_results = []
                                 for image_info in images:
-                                    image_path = image_info.get("filename")
-                                    full_image_path = os.path.join(r"C:\StabilityMatrix\Packages\ComfyUI\output", image_path)
-                                    if os.path.exists(full_image_path):
-                                        with open(full_image_path, "rb") as f:
-                                            image_data = base64.b64encode(f.read()).decode('utf-8')
-                                            image_results.append(f"data:image/png;base64,{image_data}")
+                                    filename = image_info.get("filename")
+                                    # /view API를 통해 이미지 가져오기
+                                    view_url = f"{INNER_SERVER_VIEW_URL}?filename={filename}"
+                                    image_response = requests.get(view_url)
+                                    image_response.raise_for_status()
+                                    image_data = base64.b64encode(image_response.content).decode('utf-8')
+                                    image_results.append(f"data:image/png;base64,{image_data}")
                                 if image_results:
                                     return jsonify({"images": image_results})
             time.sleep(poll_interval)
