@@ -23,8 +23,8 @@ if not os.path.exists(LOCAL_TEMP_DIR):
 INNER_IMAGE_PATH_PREFIX = r"C:\temp_images"
 
 # Inner Server의 ComfyUI 프롬프트 API 엔드포인트 (예시)
-INNER_SERVER_URL = 'http://54.180.123.29:8188/prompt'
-INNER_SERVER_STATUS_URL = 'http://54.180.123.29:8188/status'
+INNER_SERVER_URL = 'http://13.125.242.189:8188/prompt'
+INNER_SERVER_STATUS_URL = 'http://13.125.242.189:8188/status'
 
 def save_base64_image(data_uri):
     r"""
