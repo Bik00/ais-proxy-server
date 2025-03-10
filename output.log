@@ -5,13 +5,15 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://172.31.45.58:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 03:53:51] "OPTIONS /generate HTTP/1.1" 200 -
-DEBUG:proxy:Modified payload: {"init_images": ["C:\\temp_images/9e135404-8a14-4176-8b7e-b4ddc7cb4296.png"], "prompt": "a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism \ubc18\ub4dc\uc2dc \uc0ac\uc9c4 \uc18d \uad6c\ub3c4\uc640 \ubc30\uce58\ub294 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uba74\uc11c, \ub098\uba38\uc9c0 \ubd84\uc704\uae30, \uc778\ud14c\ub9ac\uc5b4, \uc9c8\uac10, \ubcbd\uc9c0 \ub4f1\uc758 \uc2a4\ud0c0\uc77c\uacfc \uc138\ubd80 \uc694\uc18c\ub294 \uc544\ub798 \ud504\ub86c\ud504\ud2b8 \ub0b4\uc6a9\uc5d0 \ub530\ub77c \ubcc0\uacbd.", "negative_prompt": "", "steps": 20, "width": 512, "height": 512, "sampler_index": "Euler", "denoising_strength": 0.6, "cfg_scale": 8, "override_settings": {"sd_model_checkpoint": "myModel.safetensors"}, "override_settings_restore_afterwards": true}
+INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 04:10:22] "OPTIONS /generate HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "POST /upload/image HTTP/1.1" 200 86
+DEBUG:proxy:Modified payload: {"init_images": ["2c82d908-217e-429d-8d41-50ac2f821f33.png"], "prompt": "a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism \ubc18\ub4dc\uc2dc \uc0ac\uc9c4 \uc18d \uad6c\ub3c4\uc640 \ubc30\uce58\ub294 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uba74\uc11c, \ub098\uba38\uc9c0 \ubd84\uc704\uae30, \uc778\ud14c\ub9ac\uc5b4, \uc9c8\uac10, \ubcbd\uc9c0 \ub4f1\uc758 \uc2a4\ud0c0\uc77c\uacfc \uc138\ubd80 \uc694\uc18c\ub294 \uc544\ub798 \ud504\ub86c\ud504\ud2b8 \ub0b4\uc6a9\uc5d0 \ub530\ub77c \ubcc0\uacbd.", "negative_prompt": "", "steps": 20, "width": 512, "height": 512, "sampler_index": "Euler", "denoising_strength": 0.6, "cfg_scale": 8, "override_settings": {"sd_model_checkpoint": "myModel.safetensors"}, "override_settings_restore_afterwards": true}
 DEBUG:proxy:내부 서버 요청: {
   "prompt": {
     "1": {
       "inputs": {
-        "image": "KakaoTalk_20250131_100424566.jpg",
+        "image": "2c82d908-217e-429d-8d41-50ac2f821f33.png",
         "upload": "image"
       },
       "class_type": "LoadImage",
@@ -175,293 +177,63 @@ DEBUG:proxy:내부 서버 요청: {
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
 DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "POST /prompt HTTP/1.1" 200 85
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 2
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 2
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
 DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/94b98b4c-68af-424e-85e9-e12b5f3df6d0 HTTP/1.1" 200 3140
-INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 03:54:51] "[35m[1mPOST /generate HTTP/1.1[0m" 504 -
-INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 03:55:04] "OPTIONS /generate HTTP/1.1" 200 -
-DEBUG:proxy:Modified payload: {"init_images": ["C:\\temp_images/9028e7ac-2a4c-4bb5-ba2a-9c546937f4d1.png"], "prompt": "a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism \ubc18\ub4dc\uc2dc \uc0ac\uc9c4 \uc18d \uad6c\ub3c4\uc640 \ubc30\uce58\ub294 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uba74\uc11c, \ub098\uba38\uc9c0 \ubd84\uc704\uae30, \uc778\ud14c\ub9ac\uc5b4, \uc9c8\uac10, \ubcbd\uc9c0 \ub4f1\uc758 \uc2a4\ud0c0\uc77c\uacfc \uc138\ubd80 \uc694\uc18c\ub294 \uc544\ub798 \ud504\ub86c\ud504\ud2b8 \ub0b4\uc6a9\uc5d0 \ub530\ub77c \ubcc0\uacbd.", "negative_prompt": "", "steps": 20, "width": 512, "height": 512, "sampler_index": "Euler", "denoising_strength": 0.6, "cfg_scale": 8, "override_settings": {"sd_model_checkpoint": "myModel.safetensors"}, "override_settings_restore_afterwards": true}
-DEBUG:proxy:내부 서버 요청: {
-  "prompt": {
-    "1": {
-      "inputs": {
-        "image": "KakaoTalk_20250131_100424566.jpg",
-        "upload": "image"
-      },
-      "class_type": "LoadImage",
-      "_meta": {
-        "title": "\ub300\uc0c1 \uc774\ubbf8\uc9c0 \ub85c\ub4dc"
-      }
-    },
-    "3": {
-      "inputs": {
-        "control_net_name": "1.5\\control_v11f1p_sd15_depth_fp16.safetensors"
-      },
-      "class_type": "ControlNetLoader",
-      "_meta": {
-        "title": "\ucee8\ud2b8\ub864\ub137 \ubaa8\ub378 \ub85c\ub4dc"
-      }
-    },
-    "4": {
-      "inputs": {
-        "strength": 0.6,
-        "start_percent": 0,
-        "end_percent": 1,
-        "positive": [
-          "8",
-          0
-        ],
-        "negative": [
-          "13",
-          0
-        ],
-        "control_net": [
-          "3",
-          0
-        ],
-        "image": [
-          "1",
-          0
-        ],
-        "vae": [
-          "39",
-          2
-        ]
-      },
-      "class_type": "ControlNetApplyAdvanced",
-      "_meta": {
-        "title": "\ucee8\ud2b8\ub864\ub137 \uc801\uc6a9"
-      }
-    },
-    "8": {
-      "inputs": {
-        "text": "a table and chairs in a room with a shelf and a vase on the wall behind them and a vase on the table, Enguerrand Quarton, 3 d render, a 3D render, figurativism \ubc18\ub4dc\uc2dc \uc0ac\uc9c4 \uc18d \uad6c\ub3c4\uc640 \ubc30\uce58\ub294 \uadf8\ub300\ub85c \uc720\uc9c0\ud558\uba74\uc11c, \ub098\uba38\uc9c0 \ubd84\uc704\uae30, \uc778\ud14c\ub9ac\uc5b4, \uc9c8\uac10, \ubcbd\uc9c0 \ub4f1\uc758 \uc2a4\ud0c0\uc77c\uacfc \uc138\ubd80 \uc694\uc18c\ub294 \uc544\ub798 \ud504\ub86c\ud504\ud2b8 \ub0b4\uc6a9\uc5d0 \ub530\ub77c \ubcc0\uacbd.",
-        "clip": [
-          "39",
-          1
-        ]
-      },
-      "class_type": "CLIPTextEncode",
-      "_meta": {
-        "title": "\uae0d\uc815\ud504\ub86c\ud504\ud2b8"
-      }
-    },
-    "13": {
-      "inputs": {
-        "text": "",
-        "clip": [
-          "39",
-          1
-        ]
-      },
-      "class_type": "CLIPTextEncode",
-      "_meta": {
-        "title": "\ubd80\uc815\ud504\ub86c\ud504\ud2b8"
-      }
-    },
-    "14": {
-      "inputs": {
-        "add_noise": "enable",
-        "noise_seed": 655776499569490,
-        "steps": 20,
-        "cfg": 8,
-        "sampler_name": "euler",
-        "scheduler": "simple",
-        "start_at_step": 0,
-        "end_at_step": 10000,
-        "return_with_leftover_noise": "disable",
-        "model": [
-          "39",
-          0
-        ],
-        "positive": [
-          "4",
-          0
-        ],
-        "negative": [
-          "4",
-          1
-        ],
-        "latent_image": [
-          "25",
-          0
-        ]
-      },
-      "class_type": "KSamplerAdvanced",
-      "_meta": {
-        "title": "\uace0\uae09 KSampler"
-      }
-    },
-    "25": {
-      "inputs": {
-        "width": 512,
-        "height": 512,
-        "batch_size": 1
-      },
-      "class_type": "EmptyLatentImage",
-      "_meta": {
-        "title": "\ube48 \uc7a0\uc7ac \uc774\ubbf8\uc9c0"
-      }
-    },
-    "26": {
-      "inputs": {
-        "tile_size": 512,
-        "overlap": 64,
-        "temporal_size": 64,
-        "temporal_overlap": 8,
-        "samples": [
-          "14",
-          0
-        ],
-        "vae": [
-          "39",
-          2
-        ]
-      },
-      "class_type": "VAEDecodeTiled",
-      "_meta": {
-        "title": "VAE \ub514\ucf54\ub4dc (\ud0c0\uc77c)"
-      }
-    },
-    "31": {
-      "inputs": {
-        "images": [
-          "26",
-          0
-        ]
-      },
-      "class_type": "SaveImageWebsocket",
-      "_meta": {
-        "title": "\uc774\ubbf8\uc9c0 \uc6f9\uc18c\ucf13 \uc804\uc1a1"
-      }
-    },
-    "39": {
-      "inputs": {
-        "ckpt_name": "architectureInterior_v70.safetensors"
-      },
-      "class_type": "CheckpointLoaderSimple",
-      "_meta": {
-        "title": "\uccb4\ud06c\ud3ec\uc778\ud2b8 \ub85c\ub4dc"
-      }
-    }
-  }
-}
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "POST /prompt HTTP/1.1" 200 85
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 2
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 13.125.242.189:8188
-DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/82a9cdae-9df5-4acf-9e7d-6af3c8b4a507 HTTP/1.1" 200 3188
-INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 03:56:04] "[35m[1mPOST /generate HTTP/1.1[0m" 504 -
+DEBUG:urllib3.connectionpool:http://13.125.242.189:8188 "GET /history/934b1556-8df0-468a-a59e-46c8c2b42ba2 HTTP/1.1" 200 3148
+INFO:werkzeug:210.183.100.33 - - [10/Mar/2025 04:11:22] "[35m[1mPOST /generate HTTP/1.1[0m" 504 -
