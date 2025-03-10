@@ -89,7 +89,6 @@ def generate():
         sample["14"]["inputs"]["cfg"] = payload.get("cfg_scale", 8)
         sample["4"]["inputs"]["strength"] = payload.get("denoising_strength", 0.6)
         sample["14"]["inputs"]["sampler_name"] = "euler"
-        # 동적으로 업로드된 이미지 설정
         if payload.get('init_images'):
             sample["1"]["inputs"]["image"] = payload['init_images'][0]
 
@@ -103,31 +102,31 @@ def generate():
         if not prompt_id:
             return jsonify({"error": "prompt_id를 받지 못했습니다."}), 500
 
-        # /history 엔드포인트를 통해 결과 폴링
+        # /history 폴링
         timeout = 60
-        poll_interval = 2
+        poll_interval = 1  # 폴링 간격 줄임
         elapsed = 0
         while elapsed < timeout:
             history_response = requests.get(f"{INNER_SERVER_HISTORY_URL}/{prompt_id}")
+            app.logger.debug("History response status: %s, size: %s", history_response.status_code, len(history_response.text))
             if history_response.status_code == 200:
                 history_data = history_response.json()
+                app.logger.debug("History response: %s", json.dumps(history_data, indent=2))
                 if prompt_id in history_data and "outputs" in history_data[prompt_id]:
                     outputs = history_data[prompt_id]["outputs"]
-                    for node_id, output in outputs.items():
-                        if "images" in output:
-                            images = output["images"]
-                            if images:
-                                image_results = []
-                                for image_info in images:
-                                    filename = image_info.get("filename")
-                                    # /view API를 통해 이미지 가져오기
-                                    view_url = f"{INNER_SERVER_VIEW_URL}?filename={filename}"
-                                    image_response = requests.get(view_url)
-                                    image_response.raise_for_status()
-                                    image_data = base64.b64encode(image_response.content).decode('utf-8')
-                                    image_results.append(f"data:image/png;base64,{image_data}")
-                                if image_results:
-                                    return jsonify({"images": image_results})
+                    if "31" in outputs and "images" in outputs["31"]:
+                        images = outputs["31"]["images"]
+                        image_results = []
+                        for image_info in images:
+                            filename = image_info.get("filename")
+                            view_url = f"{INNER_SERVER_VIEW_URL}?filename={filename}"
+                            app.logger.debug("Fetching image from: %s", view_url)
+                            image_response = requests.get(view_url)
+                            image_response.raise_for_status()
+                            image_data = base64.b64encode(image_response.content).decode('utf-8')
+                            image_results.append(f"data:image/png;base64,{image_data}")
+                        if image_results:
+                            return jsonify({"images": image_results})
             time.sleep(poll_interval)
             elapsed += poll_interval
 

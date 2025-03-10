@@ -102,11 +102,12 @@
   },
   "31": {
     "inputs": {
+      "filename_prefix": "ComfyUI_output",
       "images": ["26", 0]
     },
-    "class_type": "SaveImageWebsocket",
+    "class_type": "SaveImage",
     "_meta": {
-      "title": "이미지 웹소켓 전송"
+      "title": "이미지 저장"
     }
   },
   "39": {
