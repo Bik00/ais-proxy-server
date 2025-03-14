@@ -14,13 +14,20 @@ CORS(app)
 
 logging.basicConfig(level=logging.DEBUG)
 
+# 설정 파일 읽기
+with open("config.json", "r", encoding="utf-8") as config_file:
+    config = json.load(config_file)
+    INNER_SERVER_IP = config["inner_server_ip"]
+    INNER_SERVER_PORT = config["inner_server_port"]
+
+# URL 동적 생성
+INNER_SERVER_URL = f"http://{INNER_SERVER_IP}:{INNER_SERVER_PORT}/prompt"
+INNER_SERVER_HISTORY_URL = f"http://{INNER_SERVER_IP}:{INNER_SERVER_PORT}/history"
+INNER_SERVER_VIEW_URL = f"http://{INNER_SERVER_IP}:{INNER_SERVER_PORT}/view"
+
 LOCAL_TEMP_DIR = '/home/ubuntu/temp_images'
 if not os.path.exists(LOCAL_TEMP_DIR):
     os.makedirs(LOCAL_TEMP_DIR)
-
-INNER_SERVER_URL = 'http://13.125.242.189:8188/prompt'
-INNER_SERVER_HISTORY_URL = 'http://13.125.242.189:8188/history'
-INNER_SERVER_VIEW_URL = 'http://13.125.242.189:8188/view'
 
 def save_base64_image(data_uri):
     if ',' in data_uri:
@@ -48,7 +55,7 @@ def save_base64_image(data_uri):
 def upload_image_to_inner_server(image_path):
     with open(image_path, 'rb') as f:
         files = {'image': (os.path.basename(image_path), f, 'image/png')}
-        response = requests.post('http://13.125.242.189:8188/upload/image', files=files)
+        response = requests.post(f"http://{INNER_SERVER_IP}:{INNER_SERVER_PORT}/upload/image", files=files)
         response.raise_for_status()
         return response.json()['name']
 
